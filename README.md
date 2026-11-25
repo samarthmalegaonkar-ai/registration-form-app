@@ -215,3 +215,15 @@ ORDER BY id;
 ```
 
 The Java field names are mapped to snake_case database columns. You can also use Postman's GET endpoint to view the same records.
+
+## Deploy a free demo to Render
+
+The root `render.yaml` Blueprint configures a free Spring Boot API, a free React static site, and a hosted PostgreSQL database named `registration_db`.
+
+1. Push this repository to GitHub.
+2. Sign in at https://render.com/ (or create a Render account).
+3. Open https://dashboard.render.com/blueprints/new and connect `samarthmalegaonkar-ai/registration-form-app`.
+4. Choose the `main` branch, review the three free resources, and click **Apply**.
+5. Wait for the API, database, and static site deploys to finish. The site URL is `https://registration-frontend.onrender.com`.
+
+Render's free web service can sleep while idle and take about a minute to wake. Render's free Postgres database expires after 30 days; it is for a temporary demo, not durable production storage. The new cloud database is separate from any PostgreSQL installation on your computer, so local records are not automatically copied. Free Postgres expiry details: https://render.com/docs/free#free-postgres

@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: registration-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: singapore
+    healthCheckPath: /api/users
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: registration-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: registration-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: registration-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: registration-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: registration-db
+          property: password
+      - key: CORS_ALLOWED_ORIGIN
+        value: https://registration-frontend.onrender.com
+
+  - type: web
+    name: registration-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://registration-api.onrender.com/api
+
+databases:
+  - name: registration-db
+    databaseName: registration_db
+    user: registration_app
+    plan: free
+    region: singapore
